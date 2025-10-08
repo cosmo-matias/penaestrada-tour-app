@@ -1,7 +1,15 @@
 // src/components/layout/MainLayout.jsx
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { logout } from '../../services/auth.service';
 
 export function MainLayout() {
+    const navigate = useNavigate();
+
+    const handleLogout = async () => {
+        await logout();
+        navigate('/login');
+    };
+
     return (
         <div>
             <header>
@@ -9,10 +17,11 @@ export function MainLayout() {
                 <nav>
                     <Link to="/">Dashboard</Link> | <Link to="/passageiros">Passageiros</Link>
                 </nav>
+                <button onClick={handleLogout}>Sair</button> {/* Botão de Logout */}
             </header>
             <hr />
             <main>
-                <Outlet /> {/* O conteúdo da página atual será renderizado aqui */}
+                <Outlet />
             </main>
         </div>
     );
