@@ -1,38 +1,46 @@
 // src/components/passageiros/PassageiroForm.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export function PassageiroForm({ onSave, onCancel }) {
-    const [nomeCompleto, setNomeCompleto] = useState('');
-    const [cpf, setCpf] = useState('');
-    const [celular, setCelular] = useState('');
-    // ... Adicione aqui os outros estados para os demais campos (RG, endereço, etc.)
+export function PassageiroForm({ onSave, onCancel, initialData = null }) {
+    const [formData, setFormData] = useState({
+        nomeCompleto: '',
+        cpf: '',
+        celular: '',
+    });
+
+    // Se 'initialData' for fornecido (modo de edição), preenche o formulário
+    useEffect(() => {
+        if (initialData) {
+            setFormData(initialData);
+        } else {
+            // Limpa o formulário se não houver dados iniciais (modo de criação)
+            setFormData({ nomeCompleto: '', cpf: '', celular: '' });
+        }
+    }, [initialData]);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // TODO: Adicionar validação dos campos
-        const novoPassageiro = {
-            nomeCompleto,
-            cpf,
-            celular,
-            // ... outros campos
-        };
-        onSave(novoPassageiro);
+        onSave(formData);
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            {/* Por enquanto, vamos criar apenas os campos principais */}
             <div>
                 <label>Nome Completo:</label>
-                <input type="text" value={nomeCompleto} onChange={(e) => setNomeCompleto(e.target.value)} required />
+                <input type="text" name="nomeCompleto" value={formData.nomeCompleto} onChange={handleChange} required />
             </div>
             <div>
                 <label>CPF:</label>
-                <input type="text" value={cpf} onChange={(e) => setCpf(e.target.value)} required />
+                <input type="text" name="cpf" value={formData.cpf} onChange={handleChange} required />
             </div>
             <div>
                 <label>Celular:</label>
-                <input type="text" value={celular} onChange={(e) => setCelular(e.target.value)} />
+                <input type="text" name="celular" value={formData.celular} onChange={handleChange} />
             </div>
 
             <div style={{ marginTop: '20px' }}>

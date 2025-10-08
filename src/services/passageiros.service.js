@@ -1,5 +1,5 @@
 // src/services/passageiros.service.js
-import { collection, getDocs, addDoc  } from 'firebase/firestore';
+import { collection, getDocs, addDoc, doc, updateDoc, deleteDoc  } from 'firebase/firestore';
 
 import { db } from './firebase';
 
@@ -22,4 +22,23 @@ export const getPassageiros = async () => {
  */
 export const addPassageiro = (novoPassageiro) => {
     return addDoc(passageirosCollectionRef, novoPassageiro);
+};
+
+/**
+ * Atualiza um documento de passageiro existente.
+ * @param {string} id - O ID do passageiro a ser atualizado.
+ * @param {object} passageiroData - O objeto com os novos dados.
+ */
+export const updatePassageiro = (id, passageiroData) => {
+    const passageiroDoc = doc(db, 'passageiros', id);
+    return updateDoc(passageiroDoc, passageiroData);
+};
+
+/**
+ * Exclui um documento de passageiro.
+ * @param {string} id - O ID do passageiro a ser excluído.
+ */
+export const deletePassageiro = (id) => {
+    const passageiroDoc = doc(db, 'passageiros', id);
+    return deleteDoc(passageiroDoc);
 };
