@@ -1,42 +1,57 @@
 // src/pages/PassageirosPage.jsx
 import { useEffect, useState } from 'react';
-import { getPassageiros } from '../services/passageiros.service';
+import { getPassageiros, addPassageiro } from '../services/passageiros.service';
+import { Modal } from '../components/common/Modal';
+import { PassageiroForm } from '../components/passageiros/PassageiroForm';
 
 export function PassageirosPage() {
-    const [passageiros, setPassageiros] = useState([]); // Estado para armazenar a lista
-    const [loading, setLoading] = useState(true); // Estado para controlar o feedback de carregamento
+    const [passageiros, setPassageiros] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false); // Estado para o modal
 
     useEffect(() => {
-        // Função para buscar os dados
         async function fetchPassageiros() {
+            // ... função de busca existente, sem alterações ...
             try {
                 const data = await getPassageiros();
                 setPassageiros(data);
             } catch (error) {
                 console.error("Erro ao buscar passageiros:", error);
-                // Aqui você poderia adicionar um estado para exibir uma mensagem de erro na tela
             } finally {
                 setLoading(false);
             }
         }
-
         fetchPassageiros();
-    }, []); // O array vazio [] garante que isso rode apenas uma vez, quando o componente montar
+    }, []);
 
-    if (loading) {
-        return <p>Carregando passageiros...</p>;
-    }
+    // Função para lidar com o salvamento do novo passageiro
+    const handleSavePassageiro = async (novoPassageiro) => {
+        try {
+            const docRef = await addPassageiro(novoPassageiro);
+            // Atualiza a lista na tela sem precisar buscar tudo de novo
+            setPassageiros([...passageiros, { ...novoPassageiro, id: docRef.id }]);
+            setIsModalOpen(false); // Fecha o modal
+        } catch (error) {
+            console.error("Erro ao cadastrar passageiro:", error);
+            // Adicionar feedback de erro para o usuário aqui
+        }
+    };
+
+    if (loading) return <p>Carregando passageiros...</p>;
 
     return (
         <div>
             <h2>Gerenciamento de Passageiros</h2>
-            <button>Cadastrar Novo Passageiro</button>
+            {/* Botão que abre o modal */}
+            <button onClick={() => setIsModalOpen(true)}>Cadastrar Novo Passageiro</button>
             <hr />
 
+            {/* Renderização da tabela (código existente) */}
             {passageiros.length === 0 ? (
                 <p>Nenhum passageiro cadastrado.</p>
             ) : (
                 <table border="1" style={{ width: '100%', borderCollapse: 'collapse' }}>
+                    {/* ... thead e tbody da tabela ... */}
                     <thead>
                     <tr>
                         <th>Nome Completo</th>
@@ -59,6 +74,18 @@ export function PassageirosPage() {
                     </tbody>
                 </table>
             )}
+
+            {/* Modal de Cadastro */}
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                title="Cadastrar Novo Passageiro"
+            >
+                <PassageiroForm
+                    onSave={handleSavePassageiro}
+                    onCancel={() => setIsModalOpen(false)}
+                />
+            </Modal>
         </div>
     );
 }
