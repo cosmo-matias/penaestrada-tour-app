@@ -1,5 +1,5 @@
 // src/services/passeios.service.js
-import { collection, getDocs, addDoc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, getDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from './firebase';
 
 const passeiosCollectionRef = collection(db, 'passeios');
@@ -25,3 +25,18 @@ export const addPasseio = (novoPasseio) => {
     };
     return addDoc(passeiosCollectionRef, passeioComLotaçaoInicial);
 };
+
+/**
+ * Busca um único passeio pelo seu ID.
+ */
+export const getPasseioById = async (id) => {
+    const passeioDoc = doc(db, 'passeios', id);
+    const docSnap = await getDoc(passeioDoc);
+
+    if (docSnap.exists()) {
+        return { ...docSnap.data(), id: docSnap.id };
+    } else {
+        throw new Error("Passeio não encontrado!");
+    }
+};
+

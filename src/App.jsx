@@ -4,6 +4,7 @@ import { MainLayout } from './components/layout/MainLayout';
 import { DashboardPage } from './pages/DashboardPage';
 import { PassageirosPage } from './pages/PassageirosPage';
 import { LoginPage } from './pages/LoginPage';
+import { GerenciarPasseioPage } from './pages/GerenciarPasseioPage';
 // Futuramente, criaremos o componente ProtectedRoute
 // Por enquanto, vamos deixar as rotas abertas para montar a estrutura
 
@@ -17,9 +18,12 @@ function App() {
             <Route path="/" element={<MainLayout />}>
                 <Route index element={<DashboardPage />} />
                 <Route path="passageiros" element={<PassageirosPage />} />
+                <Route path="passeio/:passeioId" element={<GerenciarPasseioPage />} />
             </Route>
         </Routes>
     );
 }
+
+
 
 export default App;
