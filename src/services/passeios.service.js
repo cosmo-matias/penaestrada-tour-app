@@ -9,8 +9,11 @@ const passeiosCollectionRef = collection(db, 'passeios');
  */
 export const getPasseios = async () => {
     const data = await getDocs(passeiosCollectionRef);
-    // Inicializamos a lotação aqui para garantir que o campo exista
-    return data.docs.map((doc) => ({ ...doc.data(), id: doc.id, passageirosAlocados: doc.data().passageirosAlocados || [] }));
+    return data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+        passageirosAlocados: doc.data().passageirosAlocados || [],
+    }));
 };
 
 /**
@@ -18,7 +21,6 @@ export const getPasseios = async () => {
  * @param {object} novoPasseio - O objeto com os dados do passeio.
  */
 export const addPasseio = (novoPasseio) => {
-    // Garantimos que o campo de passageiros comece como um array vazio
     const passeioComLotaçaoInicial = {
         ...novoPasseio,
         passageirosAlocados: [],
@@ -40,3 +42,12 @@ export const getPasseioById = async (id) => {
     }
 };
 
+/**
+ * Atualiza um documento de passeio existente.
+ * @param {string} id - O ID do passeio a ser atualizado.
+ * @param {object} passeioData - O objeto com os novos dados a serem mesclados.
+ */
+export const updatePasseio = (id, passeioData) => {
+    const passeioDoc = doc(db, 'passeios', id);
+    return updateDoc(passeioDoc, passeioData);
+};
