@@ -104,8 +104,6 @@ Após a conclusão, a pasta `release` será criada na raiz do projeto, contendo 
 *   Tela de Gerenciamento
 *    Tela de Status
 
-*(**Nota:** Substitua as `URL_DA_SUA_IMAGEM...` pelos links das suas screenshots no GitHub para que elas apareçam aqui.)*
-
 ---
 
 ## 📂 Estrutura do Projeto
