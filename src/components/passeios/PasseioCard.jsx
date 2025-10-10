@@ -4,17 +4,17 @@ import { useNavigate } from 'react-router-dom';
 function ProgressBar({ value, max }) {
     const percentage = max > 0 ? (value / max) * 100 : 0;
     return (
-        <div>
-            <div style={{ width: '100%', backgroundColor: '#e0e0e0', borderRadius: '4px' }}>
-                <div style={{ width: `${percentage}%`, backgroundColor: '#3D7BA3', height: '10px', borderRadius: '4px' }}></div>
-            </div>
+        <div className="progress-bar-container">
+            <div
+                className="progress-bar-fill"
+                style={{ width: `${percentage}%` }}
+            ></div>
         </div>
     );
 }
 
-export function PasseioCard({ passeio }) {
+export function PasseioCard({ passeio, onStatusChange }) {
     const navigate = useNavigate();
-    const cardStyle = { border: '1px solid #ccc', padding: '16px', margin: '8px', borderRadius: '8px' };
     const vagasDisponiveis = passeio.transporte.capacidade - passeio.passageirosAlocados.length;
 
     const handleGerenciarClick = () => {
@@ -22,7 +22,7 @@ export function PasseioCard({ passeio }) {
     };
 
     return (
-        <div style={cardStyle}>
+        <div className="card">
             <h3>{passeio.nomeDestino}</h3>
             <p>{passeio.cidadeEstado} - {new Date(passeio.data).toLocaleDateString()}</p>
             <p>
@@ -31,7 +31,18 @@ export function PasseioCard({ passeio }) {
                 ({vagasDisponiveis} vagas disponíveis)
             </p>
             <ProgressBar value={passeio.passageirosAlocados.length} max={passeio.transporte.capacidade} />
-            <button style={{marginTop: '10px'}} onClick={handleGerenciarClick}>Gerenciar</button>
+            <button className="btn btn-primary" style={{marginTop: '15px', width: '100%'}} onClick={handleGerenciarClick}>Gerenciar</button>
+
+            {/* ===== NOVOS BOTÕES DE STATUS AQUI ===== */}
+            <div className="card-actions">
+                <button onClick={() => onStatusChange(passeio.id, 'Realizado')} className="btn-status btn-realizado">
+                    Realizado
+                </button>
+                <button onClick={() => onStatusChange(passeio.id, 'Cancelado')} className="btn-status btn-cancelado">
+                    Cancelado
+                </button>
+            </div>
+
         </div>
     );
 }

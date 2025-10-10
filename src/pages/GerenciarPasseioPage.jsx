@@ -129,26 +129,42 @@ export function GerenciarPasseioPage() {
     const passageirosDisponiveis = todosPassageiros.filter(p => !passageirosAlocadosIds.includes(p.id));
 
     return (
-        // O JSX continua exatamente como estava, sem alterações.
         <div>
             <h2>Gerenciar: {passeio.nomeDestino}</h2>
-            <div style={{ display: 'flex', gap: '40px', marginTop: '20px' }}>
-                <div style={{ flex: 1.5 }}>
-                    <h3>Mapa de Assentos</h3>
+
+            <div className="management-grid"> {/* Nosso novo container Flexbox */}
+
+                {/* Card 1: Mapa de Assentos (com espaço reduzido) */}
+                <div className="management-card seat-map-container">
+                    <div className="card-header">
+                        <h3>Mapa de Assentos</h3>
+                    </div>
                     <SeatMap
                         capacidade={passeio.transporte.capacidade}
                         passageirosAlocados={passeio.passageirosAlocados}
                         onSeatSelect={handleSeatSelect}
                     />
                 </div>
-                <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+
+                {/* Card 2: Lista de Passageiros (com espaço ampliado) */}
+                <div className="management-card passenger-list-container">
+                    <div className="card-header">
                         <h3>Passageiros no Ônibus ({listaExibicaoPassageiros.length})</h3>
-                        <button onClick={handleGenerateReport}>Gerar Relatório</button>
+                        {/* Botão com estilo secundário para não ser a ação principal */}
+                        <button onClick={handleGenerateReport} className="btn btn-secondary">
+                            Gerar Relatório
+                        </button>
                     </div>
-                    <table border="1" style={{ width: '100%', borderCollapse: 'collapse' }}>
+
+                    <table className="table">
                         <thead>
-                        <tr><th>Pol.</th><th>Nome</th><th>Idade</th><th>Contato</th><th>Embarque</th></tr>
+                        <tr>
+                            <th>Pol.</th>
+                            <th>Nome</th>
+                            <th>Idade</th>
+                            <th>Contato</th>
+                            <th>Embarque</th>
+                        </tr>
                         </thead>
                         <tbody>
                         {listaExibicaoPassageiros.map(p => (
@@ -164,6 +180,8 @@ export function GerenciarPasseioPage() {
                     </table>
                 </div>
             </div>
+
+            {/* O Modal não precisa de alterações */}
             <Modal
                 isOpen={modalMode !== 'closed'}
                 onClose={closeModal}
@@ -182,8 +200,8 @@ export function GerenciarPasseioPage() {
                         <p><strong>Passageiro:</strong> {passageirosMap.get(selectedAllocation.passageiroId)?.nomeCompleto}</p>
                         {selectedAllocation.criancaDeColo && <p><strong>Acompanhante:</strong> {passageirosMap.get(selectedAllocation.criancaDeColo.passageiroId)?.nomeCompleto}</p>}
                         <hr/>
-                        <button onClick={handleUnallocate} style={{backgroundColor: '#ff4d4d', color: 'white'}}>Desalocar Passageiro</button>
-                        <button onClick={closeModal} style={{marginLeft: '10px'}}>Cancelar</button>
+                        <button onClick={handleUnallocate} className="btn btn-danger">Desalocar Passageiro</button>
+                        <button onClick={closeModal} className="btn btn-secondary" style={{marginLeft: '10px'}}>Cancelar</button>
                     </div>
                 )}
             </Modal>

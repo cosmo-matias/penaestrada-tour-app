@@ -36,7 +36,7 @@ export function AlocacaoForm({ passageirosDisponiveis, locaisDeEmbarque, onSave,
     };
 
     return (
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+        <form onSubmit={handleSubmit} className="form">
             <div>
                 <label>Buscar Passageiro Responsável:</label>
                 {responsavel ? (
@@ -52,6 +52,7 @@ export function AlocacaoForm({ passageirosDisponiveis, locaisDeEmbarque, onSave,
                             value={buscaResponsavel}
                             onChange={(e) => setBuscaResponsavel(e.target.value)}
                             placeholder="Digite para buscar..."
+                            className="form-input"
                             style={{ width: '100%', boxSizing: 'border-box' }}
                         />
                         {responsaveisFiltrados.length > 0 && (
@@ -68,7 +69,7 @@ export function AlocacaoForm({ passageirosDisponiveis, locaisDeEmbarque, onSave,
             </div>
 
             <div>
-                <input type="checkbox" checked={levaCrianca} onChange={(e) => setLevaCrianca(e.target.checked)} />
+                <input className="form-input" type="checkbox" checked={levaCrianca} onChange={(e) => setLevaCrianca(e.target.checked)} />
                 <label> Leva criança de colo?</label>
             </div>
 
@@ -88,6 +89,7 @@ export function AlocacaoForm({ passageirosDisponiveis, locaisDeEmbarque, onSave,
                                 value={buscaCrianca}
                                 onChange={(e) => setBuscaCrianca(e.target.value)}
                                 placeholder="Digite para buscar..."
+                                className="form-input"
                                 style={{ width: '100%', boxSizing: 'border-box' }}
                             />
                             {criancasFiltradas.length > 0 && (
@@ -106,15 +108,15 @@ export function AlocacaoForm({ passageirosDisponiveis, locaisDeEmbarque, onSave,
 
             <div>
                 <label>Local de Embarque:</label>
-                <select value={localDeEmbarque} onChange={(e) => setLocalDeEmbarque(e.target.value)} required style={{ width: '100%', padding: '5px' }}>
+                <select value={localDeEmbarque} className="form-select" onChange={(e) => setLocalDeEmbarque(e.target.value)} required style={{ width: '100%', padding: '5px' }}>
                     <option value="">-- Selecione o local --</option>
                     {locaisDeEmbarque.map(local => <option key={local} value={local}>{local}</option>)}
                 </select>
             </div>
 
-            <div style={{ marginTop: '20px' }}>
-                <button type="submit">Alocar Passageiro</button>
-                <button type="button" onClick={onCancel} style={{ marginLeft: '10px' }}>Cancelar</button>
+            <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
+                <button type="submit" className="btn btn-primary">Alocar Passageiro</button>
+                <button type="button" onClick={onCancel} className="btn btn-primary">Cancelar</button>
             </div>
         </form>
     );

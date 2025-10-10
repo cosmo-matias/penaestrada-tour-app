@@ -77,10 +77,12 @@ export function PassageirosPage() {
 
     return (
         <div>
-            <h2>Gerenciamento de Passageiros</h2>
-            <button onClick={handleCreate}>Cadastrar Novo Passageiro</button>
+            <div className="page-header">
+                <h2>Gerenciamento de Passageiros</h2>
+                <button onClick={handleCreate} className="btn btn-primary">Cadastrar Novo Passageiro</button>
+            </div>
             <hr />
-            <table border="1" style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <table className="table">
                 <thead>
                 <tr>
                     <th>Nome Completo</th>
@@ -96,8 +98,8 @@ export function PassageirosPage() {
                         <td>{passageiro.cpf}</td>
                         <td>{passageiro.celular}</td>
                         <td>
-                            <button onClick={() => handleEdit(passageiro)}>Editar</button>
-                            <button onClick={() => handleDelete(passageiro.id)}>Excluir</button>
+                            <button onClick={() => handleEdit(passageiro)} className="btn btn-secondary">Editar</button>
+                            <button onClick={() => handleDelete(passageiro.id)} className="btn btn-danger">Excluir</button>
                         </td>
                     </tr>
                 ))}

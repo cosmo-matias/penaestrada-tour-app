@@ -5,6 +5,7 @@ import { DashboardPage } from './pages/DashboardPage';
 import { PassageirosPage } from './pages/PassageirosPage';
 import { LoginPage } from './pages/LoginPage';
 import { GerenciarPasseioPage } from './pages/GerenciarPasseioPage';
+import { StatusPasseiosPage } from './pages/StatusPasseiosPage';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 <Route index element={<DashboardPage />} />
                 <Route path="passageiros" element={<PassageirosPage />} />
                 <Route path="passeio/:passeioId" element={<GerenciarPasseioPage />} />
+                <Route path="status" element={<StatusPasseiosPage />} />
             </Route>
         </Routes>
     );

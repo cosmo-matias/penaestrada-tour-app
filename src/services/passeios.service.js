@@ -24,6 +24,7 @@ export const addPasseio = (novoPasseio) => {
     const passeioComLotaçaoInicial = {
         ...novoPasseio,
         passageirosAlocados: [],
+        status: 'Em Andamento'
     };
     return addDoc(passeiosCollectionRef, passeioComLotaçaoInicial);
 };

@@ -1,6 +1,7 @@
 // src/components/layout/MainLayout.jsx
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { logout } from '../../services/auth.service';
+import logo from '../../assets/logoPeNaEstradaTour.png'; // Importe a logo
 
 export function MainLayout() {
     const navigate = useNavigate();
@@ -12,15 +13,16 @@ export function MainLayout() {
 
     return (
         <div>
-            <header>
-                <h1>Pé Na Estrada Tour</h1>
-                <nav>
-                    <Link to="/">Dashboard</Link> | <Link to="/passageiros">Passageiros</Link>
+            <header className="app-header">
+                <img src={logo} alt="Pé Na Estrada Tour Logo" className="app-logo" />
+                <nav className="nav-links">
+                    <Link to="/">Dashboard</Link>
+                    <Link to="/passageiros">Passageiros</Link>
+                    <Link to="/status">Status dos Passeios</Link>
                 </nav>
-                <button onClick={handleLogout}>Sair</button> {/* Botão de Logout */}
+                <button onClick={handleLogout} className="btn btn-secondary">Sair</button>
             </header>
-            <hr />
-            <main>
+            <main className="container">
                 <Outlet />
             </main>
         </div>
