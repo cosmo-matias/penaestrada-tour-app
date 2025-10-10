@@ -1,7 +1,7 @@
 // src/components/passeios/PasseioForm.jsx
 import { useState } from 'react';
 
-const locaisEmbarqueOptions = ["Capim", "Olho D'água", "Cuité de Mamanguape", "Sapé", "Mamanguape", "São Paulo"];
+const locaisEmbarqueOptions = ["Capim", "Olho D'água", "Cuité de Mamanguape", "Sapé", "Mamanguape", "João Pessoa"];
 const transporteOptions = [
     { label: "Ônibus 50 Lugares", capacidade: 50 },
     { label: "Ônibus 46 Lugares", capacidade: 46 },

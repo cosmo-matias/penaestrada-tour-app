@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../services/auth.service';
+import logo from '../assets/logoPeNaEstradaTour.png'; // Importa a logo
 
 export function LoginPage() {
     const [email, setEmail] = useState('');
@@ -22,20 +23,34 @@ export function LoginPage() {
     };
 
     return (
-        <div>
-            <h2>Login - Pé Na Estrada Tour</h2>
-            <form onSubmit={handleLogin}>
-                <div>
-                    <label>Email:</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Senha:</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                </div>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                <button type="submit">Entrar</button>
-            </form>
+        <div className="login-page">
+            <div className="login-container">
+                <img src={logo} alt="Pé Na Estrada Tour Logo" className="app-logo" />
+                <h2>Gerenciador de Viagens</h2>
+
+                <form onSubmit={handleLogin} className="login-form">
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Email"
+                        className="form-input"
+                        required
+                    />
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Senha"
+                        className="form-input"
+                        required
+                    />
+
+                    <button type="submit" className="btn btn-primary">Entrar</button>
+                </form>
+
+                <p className="login-error">{error}</p>
+            </div>
         </div>
     );
 }

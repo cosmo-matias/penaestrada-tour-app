@@ -363,3 +363,52 @@ hr {
     background-color: #f8f9fa;
     margin-left: 20px; /* Dá um espaço entre o nome e o seletor */
 }
+
+/* 12. Estilos da Página de Login (NOVO) */
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: var(--azul-quase-branco-fundo);
+}
+
+.login-container {
+    background-color: var(--branco);
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-container .app-logo {
+    height: 150px;
+    margin-bottom: 20px;
+}
+
+.login-container h2 {
+    color: var(--azul-principal);
+    margin-bottom: 30px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login-form .form-input {
+    text-align: left; /* Alinha o texto do input à esquerda */
+}
+
+.login-error {
+    color: var(--vermelho-perigo);
+    margin-top: 15px;
+    min-height: 20px; /* Garante que o layout não pule quando o erro aparece */
+}
+
+.login-form .btn-primary {
+    margin-top: 10px;
+}
