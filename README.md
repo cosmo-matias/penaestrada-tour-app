@@ -99,12 +99,10 @@ Após a conclusão, a pasta `release` será criada na raiz do projeto, contendo 
 
 ## 🖼️ Telas da Aplicação
 
-<p align="center">
-  <img src="URL_DA_SUA_IMAGEM_LOGIN.png" width="48%" alt="Tela de Login">
-  <img src="URL_DA_SUA_IMAGEM_DASHBOARD.png" width="48%" alt="Dashboard de Passeios">
-  <img src="URL_DA_SUA_IMAGEM_GERENCIAMENTO.png" width="48%" alt="Tela de Gerenciamento">
-  <img src="URL_DA_SUA_IMAGEM_STATUS.png" width="48%" alt="Tela de Status">
-</p>
+*   Tela de Login
+*   Dashboard de Passeios
+*   Tela de Gerenciamento
+*    Tela de Status
 
 *(**Nota:** Substitua as `URL_DA_SUA_IMAGEM...` pelos links das suas screenshots no GitHub para que elas apareçam aqui.)*
 
